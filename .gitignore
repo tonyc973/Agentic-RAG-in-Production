@@ -1,0 +1,16 @@
+# --- Security & Secrets ---
+.env
+
+# --- Python ---
+__pycache__/
+*.pyc
+
+# --- Database & Docker ---
+pgdata/
+whisper_models/
+*.db
+*.sqlite
+
+# --- OS Files ---
+.DS_Store
+Thumbs.db

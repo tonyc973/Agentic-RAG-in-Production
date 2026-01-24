@@ -1,0 +1,22 @@
+research_task:
+  description: >
+    Analyze the user's question: '{query}'.
+    If the question requires knowledge from the uploaded PDF, use the 'Search PDF Knowledge Base' tool.
+    If the question is just a greeting or general chat, you can skip searching.
+  expected_output: "A summary of relevant facts found in the PDF, or a note that no search was needed."
+
+answer_task:
+  description: >
+    Generate a final response to the user.
+    
+    Context:
+    1. User's Current Question: "{query}"
+    2. Previous Chat History: 
+    {chat_history}
+    3. Research Findings: [The result from the Researcher]
+
+    Instructions:
+    - If the user asks about the PDF, use the Research Findings.
+    - If the user refers to previous messages (e.g., "what did I just say?"), use the Chat History.
+    - Be conversational and helpful.
+  expected_output: "A string containing the final response to the user."

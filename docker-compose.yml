@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: rag-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - rag-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  whisper-api:
+    image: onerahmet/openai-whisper-asr-webservice:latest
+    container_name: rag-whisper
+    restart: unless-stopped
+    environment:
+      - ASR_MODEL=base
+      - ASR_ENGINE=openai_whisper
+    volumes:
+      - whisper_models:/root/.cache/whisper
+    networks:
+      - rag-network
+
+  streamlit-app:
+    build: .
+    container_name: rag-streamlit
+    restart: always
+    ports:
+      - "8501:8501"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PINECONE_API_KEY=${PINECONE_API_KEY}
+      - SERPER_API_KEY=${SERPER_API_KEY}
+      - BROWSERLESS_API_KEY=${BROWSERLESS_API_KEY}
+      - DB_CONNECTION=${DB_CONNECTION}
+      - WHISPER_URL=${WHISPER_URL}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - rag-network
+
+volumes:
+  pgdata:
+  whisper_models:
+
+networks:
+  rag-network:
+    driver: bridge

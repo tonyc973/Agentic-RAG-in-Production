@@ -1,0 +1,20 @@
+# --- Core Frameworks (Pinned for stability) ---
+crewai==0.22.5
+streamlit==1.32.0
+
+# --- Helper Libraries (Unpinned so Pip can resolve conflicts) ---
+streamlit-cookies-controller
+streamlit-mic-recorder
+SQLAlchemy
+psycopg2-binary
+langchain
+langchain-openai
+langchain-community
+langchain-pinecone
+pinecone-client
+pypdf
+tiktoken
+requests
+python-dotenv
+unstructured
+lxml
