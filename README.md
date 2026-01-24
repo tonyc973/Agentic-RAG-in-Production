@@ -5,7 +5,7 @@ The project is fully dockerized with persistent database storage, cookie-based s
 
 ## Key Features
 
-* True Multi-User State: Utilizes 'streamlit-cookies-controller' and PostgreSQL to maintain isolated chat histories for simultaneous users.
+* Multi-User State: Utilizes 'streamlit-cookies-controller' and PostgreSQL to maintain isolated chat histories for simultaneous users.
 * Secure Vector Namespaces: Embeddings are stored in Pinecone vector databases and isolated by `session_id` so users cannot query each other's private data.
 * Agentic Workflow (CrewAI): Autonomously searches PDFs, browses the live web (Browserless), and queries Google (Serper).
 * Query Contextualization: Automatically rewrites ambiguous voice queries (e.g., "tell me more about that") into standalone vector-searchable prompts.
