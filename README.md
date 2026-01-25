@@ -1,4 +1,4 @@
-A multi-user **Agentic RAG (Retrieval-Augmented Generation)** application. This platform allows users to interact with PDFs and with the internet, all the being powered by autonomous AI agents. 
+This is a multi-user **Agentic RAG (Retrieval-Augmented Generation)** application. This platform allows users to interact with PDFs and with the internet, all the being powered by autonomous AI agents. 
 The project is fully dockerized with persistent database storage, cookie-based session management, and secure vector namespaces.
 
 ---
