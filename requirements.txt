@@ -18,3 +18,10 @@ requests
 python-dotenv
 unstructured
 lxml
+# for local whispercpp audio model
+flask
+flask-cors
+numpy
+soundfile
+librosa
+pywhispercpp

@@ -19,15 +19,16 @@ services:
       timeout: 5s
       retries: 5
 
-  whisper-api:
-    image: onerahmet/openai-whisper-asr-webservice:latest
-    container_name: rag-whisper
+  audio_backend:
+    build: .
+    container_name: rag-audio-backend
     restart: unless-stopped
-    environment:
-      - ASR_MODEL=base
-      - ASR_ENGINE=openai_whisper
+    command: python audio_local_server.py 
+    ports:
+      - "5001:5001"
     volumes:
-      - whisper_models:/root/.cache/whisper
+      - .:/app # Syncs your code live
+      - whisper_models:/root/.cache/whisper # Persists the AI model
     networks:
       - rag-network
 
