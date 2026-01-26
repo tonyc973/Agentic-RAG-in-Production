@@ -226,7 +226,6 @@ if final_query:
     is_first_message = len(chat_history.messages) <= 2
     if is_first_message and session_id not in chat_titles_map:
         generate_title(session_id, final_query)
-        st.rerun()
     
     # Run Agentic Workflow
     with st.chat_message("assistant"):
@@ -238,3 +237,7 @@ if final_query:
                 chat_history.add_ai_message(response)
             except Exception as e:
                 st.error(f"Error: {e}")
+    is_first_message = len(chat_history.messages) <= 2
+    if is_first_message and session_id not in chat_titles_map:
+        generate_title(session_id, final_query)
+        st.rerun()
