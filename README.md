@@ -48,7 +48,7 @@ POSTGRES_PASSWORD=supersecretpassword
 POSTGRES_DB=ragdb
 DB_CONNECTION=postgresql://raguser:supersecretpassword@postgres:5432/ragdb
 
-WHISPER_URL=http://whisper-api:9000/asr
+WHISPER_URL=your_transcribe_endpoint
 
 # Create a new index in Pinecone named agentic-rag-prod with dimensions set to 1536 and the metric set to cosine
 
