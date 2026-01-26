@@ -1,4 +1,4 @@
-This is a multi-user **Agentic RAG (Retrieval-Augmented Generation)** application. This platform allows users to interact with PDFs and with the internet, all the being powered by autonomous AI agents. 
+This is a multi-user **Agentic RAG (Retrieval-Augmented Generation)** application. This platform allows users to interact with PDFs and with the internet, eventually using vocal commands, all being powered by autonomous AI agents. 
 The project is fully dockerized with persistent database storage, cookie-based session management, and secure vector namespaces.
 
 ---
@@ -8,6 +8,7 @@ The project is fully dockerized with persistent database storage, cookie-based s
 * Multi-User State: Utilizes 'streamlit-cookies-controller' and PostgreSQL to maintain isolated chat histories for simultaneous users.
 * Secure Vector Namespaces: Embeddings are stored in Pinecone vector databases and isolated by `session_id` so users cannot query each other's private data.
 * Agentic Workflow (CrewAI): Autonomously searches PDFs, browses the live web (Browserless), and queries Google (Serper).
+* Local and Fast Speech-To-Text Model : Transcribe audio live using an on-prem whisper.cpp model
 * Query Contextualization: Automatically rewrites ambiguous voice queries (e.g., "tell me more about that") into standalone vector-searchable prompts.
 
 ---
@@ -18,6 +19,7 @@ The application is orchestrated via **Docker Compose**, running three isolated s
 
 1. **Streamlit App (Port 8501):** The user interface and LangChain/CrewAI controller.
 2. **PostgreSQL DB:** Persistent storage for LangChain `SQLChatMessageHistory`.
+3. **Whisper.cpp Audio Backed:** Fast transcription using Whisper.cpp local model
 
 
 ---
