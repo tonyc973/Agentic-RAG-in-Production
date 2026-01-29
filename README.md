@@ -1,6 +1,8 @@
 This is a multi-user **Agentic RAG (Retrieval-Augmented Generation)** application. This platform allows users to interact with PDFs and with the internet, eventually using vocal commands, all being powered by autonomous AI agents. 
 The project is fully dockerized with persistent database storage, cookie-based session management, and secure vector namespaces.
 
+<img width="1897" height="1038" alt="image" src="https://github.com/user-attachments/assets/bb6b2dad-70cf-4dfd-8efe-067272244831" />
+
 ---
 
 ## Key Features
