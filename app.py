@@ -66,11 +66,21 @@ def get_chat_titles():
 
 def generate_title(s_id, first_query):
     """Uses LLM to summarize the first user query into a 4-word title."""
-    llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.5)
-    title = llm.invoke(f"Summarize this query into a 4-word title: {first_query}").content.replace('"', '')
-    with db_engine.connect() as conn:
-        conn.execute(text("INSERT INTO chat_titles (session_id, title) VALUES (:s, :t)"), {"s": s_id, "t": title})
-        conn.commit()
+    try:
+        llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.5)
+        title = llm.invoke(f"Summarize this query into a 4-word title: {first_query}").content.replace('"', '')
+        
+        with db_engine.connect() as conn:
+            # 🔴 CRITICAL FIX: Add "ON CONFLICT" clause
+            query = text("""
+                INSERT INTO chat_titles (session_id, title) 
+                VALUES (:s, :t)
+                ON CONFLICT (session_id) DO UPDATE SET title = EXCLUDED.title
+            """)
+            conn.execute(query, {"s": s_id, "t": title})
+            conn.commit()
+    except Exception as e:
+        print(f"Title generation skipped: {e}")
 
 def delete_session(s_id):
     """BULLETPROOF DELETE: Erases PostgreSQL text history AND Pinecone vectors."""
